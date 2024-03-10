@@ -1,51 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    #countdown-timer {
-      font-size: 24px;
-      text-align: center;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+
+        #countdown {
+            font-size: 2em;
+            font-weight: bold;
+            color: #333;
+        }
+    </style>
 </head>
 <body>
+  彼方の記憶まで……
+    <div id="countdown"></div>
 
-  
-中身どう？？
+    <script>
+        // ターゲット日時の設定
+        var targetDate = new Date("2024-10-27T00:00:00Z").getTime();
 
-  
-<div id="countdown-timer"></div>
+        // カウントダウンの更新
+        function updateCountdown() {
+            var currentDate = new Date().getTime();
+            var timeRemaining = targetDate - currentDate;
 
-<script>
-  // カウントダウンの終了日時を設定（例: 2024年12月31日 23:59:59）
-  const countdownDate = new Date("December 31, 2024 23:59:59").getTime();
+            var seconds = Math.floor(timeRemaining / 1000);
 
-  // タイマーを1秒ごとに更新
-  const timerInterval = setInterval(function() {
-    // 現在の日時を取得
-    const now = new Date().getTime();
+            document.getElementById("countdown").innerHTML = seconds + " 秒";
+        }
 
-    // 残り時間を計算
-    const distance = countdownDate - now;
+        // 1秒ごとにカウントダウンを更新
+        setInterval(updateCountdown, 1000);
 
-    // 日、時、分、秒を計算
-    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-    // カウントダウンタイマーを表示
-    document.getElementById("countdown-timer").innerHTML = `${days}日 ${hours}時間 ${minutes}分 ${seconds}秒`;
-
-    // タイマーが終了したらメッセージを表示
-    if (distance < 0) {
-      clearInterval(timerInterval);
-      document.getElementById("countdown-timer").innerHTML = "タイマー終了しました";
-    }
-  }, 1000);
-</script>
-
+        // 初回表示
+        updateCountdown();
+    </script>
 </body>
 </html>
